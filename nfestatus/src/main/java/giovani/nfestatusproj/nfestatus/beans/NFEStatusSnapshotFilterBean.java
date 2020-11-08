@@ -10,7 +10,7 @@ public class NFEStatusSnapshotFilterBean {
 	private Integer rows;
 	private Date captureMoment;
 	private List<EnumAuthorizer> authorizers;
-	private Boolean mostUnavailables;
+	private Boolean distinctByAuthorizerLatest;
 	
 	public Integer getPage() {
 		return page;
@@ -44,11 +44,11 @@ public class NFEStatusSnapshotFilterBean {
 		this.authorizers = authorizers;
 	}
 
-	public Boolean getMostUnavailables() {
-		return mostUnavailables;
+	public Boolean getDistinctByAuthorizerLatest() {
+		return distinctByAuthorizerLatest;
 	}
-	
-	public void setMostUnavailables(Boolean mostUnavailables) {
-		this.mostUnavailables = mostUnavailables;
+
+	public void setDistinctByAuthorizerLatest(Boolean distinctByAuthorizerLatest) {
+		this.distinctByAuthorizerLatest = distinctByAuthorizerLatest;
 	}
 }

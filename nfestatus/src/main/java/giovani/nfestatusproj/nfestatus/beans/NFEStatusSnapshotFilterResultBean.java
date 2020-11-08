@@ -1,5 +1,6 @@
 package giovani.nfestatusproj.nfestatus.beans;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -31,6 +32,15 @@ public class NFEStatusSnapshotFilterResultBean {
 		
 		bean.setResults(page.getContent());
 		bean.setTotalRecords(page.getTotalElements());
+		
+		return bean;
+	}
+	
+	public static NFEStatusSnapshotFilterResultBean empty() {
+		NFEStatusSnapshotFilterResultBean bean = new NFEStatusSnapshotFilterResultBean();
+		
+		bean.setResults(Collections.emptyList());
+		bean.setTotalRecords(0L);
 		
 		return bean;
 	}

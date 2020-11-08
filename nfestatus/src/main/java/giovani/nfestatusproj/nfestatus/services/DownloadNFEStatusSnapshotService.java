@@ -11,13 +11,8 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import giovani.nfestatusproj.nfestatus.beans.NFEStatusSnapshotFilterBean;
-import giovani.nfestatusproj.nfestatus.beans.NFEStatusSnapshotFilterResultBean;
 import giovani.nfestatusproj.nfestatus.database.eao.NFEStatusSnapshotEAO;
 import giovani.nfestatusproj.nfestatus.database.entities.NFEStatusSnapshot;
 import giovani.nfestatusproj.nfestatus.database.enums.EnumAuthorizer;
@@ -25,7 +20,7 @@ import giovani.nfestatusproj.nfestatus.database.enums.EnumNFEStatus;
 import giovani.nfestatusproj.nfestatus.exceptions.InternalErrorException;
 
 @Component
-public class NFEStatusSnapshotService {
+public class DownloadNFEStatusSnapshotService {
 	private static final String URL_NFE_FAZENDA_DISPONIBILIDADE = "http://www.nfe.fazenda.gov.br/portal/disponibilidade.aspx";
 	
 	private static final String NFESTATUS_ONLINE_IMG = "<img src=\"imagens/bola_verde_P.png\">";
@@ -47,14 +42,6 @@ public class NFEStatusSnapshotService {
 	@Autowired
 	private NFEStatusSnapshotEAO nfeStatusSnapshotEAO;
 	
-	public NFEStatusSnapshotFilterResultBean querySnapshotsPaginated(NFEStatusSnapshotFilterBean filter) {
-		Pageable pagination = PageRequest.of(filter.getPage(), filter.getRows());
-		
-		Page<NFEStatusSnapshot> page = nfeStatusSnapshotEAO.findPaginated(pagination);
-		
-		return NFEStatusSnapshotFilterResultBean.ofPage(page);
-	}
-
 	public void downloadNFEStatus() {
 		Collection<NFEStatusSnapshot> snapshots = parseStatusTableNFEFazendaDisnponibilidade();
 		persistSnapshots(snapshots);

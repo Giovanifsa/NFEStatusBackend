@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import giovani.nfestatusproj.nfestatus.services.NFEStatusSnapshotService;
+import giovani.nfestatusproj.nfestatus.services.DownloadNFEStatusSnapshotService;
 
 @Component
 public class DownloadNFEStatusJob {
@@ -15,13 +15,13 @@ public class DownloadNFEStatusJob {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
-	private NFEStatusSnapshotService nfeStatusSnapshotService;
+	private DownloadNFEStatusSnapshotService downloadNFEStatusSnapshotService;
 	
 	@Scheduled(fixedRate = FIVE_MINUTES, initialDelay = 0)
 	public void downloadNFEStatus() {
 		logger.info("Running DownloadNFEStatusJob...");
 		
-		nfeStatusSnapshotService.downloadNFEStatus();
+		downloadNFEStatusSnapshotService.downloadNFEStatus();
 		
 		logger.info("DownloadNFEStatusJob has finished.");
 	}

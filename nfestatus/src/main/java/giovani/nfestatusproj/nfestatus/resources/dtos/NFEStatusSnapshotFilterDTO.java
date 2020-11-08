@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import giovani.nfestatusproj.nfestatus.beans.NFEStatusSnapshotFilterBean;
 import giovani.nfestatusproj.nfestatus.database.enums.EnumAuthorizer;
+import giovani.nfestatusproj.nfestatus.utils.ListUtils;
 
 public class NFEStatusSnapshotFilterDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -15,7 +16,7 @@ public class NFEStatusSnapshotFilterDTO implements Serializable {
 	private Integer rows;
 	private Date captureMoment;
 	private List<EnumAuthorizerDTO> authorizers;
-	private Boolean mostUnavailables;
+	private Boolean distinctByAuthorizerLatest;
 	
 	public Integer getPage() {
 		return page;
@@ -48,25 +49,25 @@ public class NFEStatusSnapshotFilterDTO implements Serializable {
 	public void setAuthorizers(List<EnumAuthorizerDTO> authorizers) {
 		this.authorizers = authorizers;
 	}
+	
+	public Boolean getDistinctByAuthorizerLatest() {
+		return distinctByAuthorizerLatest;
+	}
 
-	public Boolean getMostUnavailables() {
-		return mostUnavailables;
+	public void setDistinctByAuthorizerLatest(Boolean distinctByAuthorizerLatest) {
+		this.distinctByAuthorizerLatest = distinctByAuthorizerLatest;
 	}
-	
-	public void setMostUnavailables(Boolean mostUnavailables) {
-		this.mostUnavailables = mostUnavailables;
-	}
-	
+
 	public NFEStatusSnapshotFilterBean toBean() {
 		NFEStatusSnapshotFilterBean bean = new NFEStatusSnapshotFilterBean();
 		
 		bean.setCaptureMoment(getCaptureMoment());
-		bean.setMostUnavailables(getMostUnavailables());
 		bean.setPage(getPage());
 		bean.setRows(getRows());
+		bean.setDistinctByAuthorizerLatest(getDistinctByAuthorizerLatest());
 		
-		if (authorizers != null) {
-			List<EnumAuthorizer> converted = authorizers.stream()
+		if (!ListUtils.isEmpty(getAuthorizers())) {
+			List<EnumAuthorizer> converted = getAuthorizers().stream()
 					.map((dto) -> EnumAuthorizer.values()[dto.getEnumAuthorizerOrdinal()])
 					.collect(Collectors.toList());
 
