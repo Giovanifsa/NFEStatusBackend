@@ -1,16 +1,33 @@
 package giovani.nfestatusproj.nfestatus.exceptions;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
+@ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
 public class InternalErrorException extends ApplicationException {
-	private static final int HTTP_CODE = HttpStatus.INTERNAL_SERVER_ERROR.value();
-	private static final long serialVersionUID = 65273782474812991L;
-	
-	public InternalErrorException(String message) {
-		super(HTTP_CODE, message);
+	private static final long serialVersionUID = -5573443298637375939L;
+
+	public InternalErrorException() {
+		super();
 	}
-	
-	public InternalErrorException(Throwable th) {
-		super(HTTP_CODE, th);
+
+	public InternalErrorException(String message, 
+								  Throwable cause, 
+								  boolean enableSuppression,
+								  boolean writableStackTrace) {
+		
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
+
+	public InternalErrorException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	public InternalErrorException(String message) {
+		super(message);
+	}
+
+	public InternalErrorException(Throwable cause) {
+		super(cause);
 	}
 }

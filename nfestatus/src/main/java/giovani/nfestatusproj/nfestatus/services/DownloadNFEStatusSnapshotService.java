@@ -18,6 +18,7 @@ import giovani.nfestatusproj.nfestatus.database.entities.NFEStatusSnapshot;
 import giovani.nfestatusproj.nfestatus.database.enums.EnumAuthorizer;
 import giovani.nfestatusproj.nfestatus.database.enums.EnumNFEStatus;
 import giovani.nfestatusproj.nfestatus.exceptions.InternalErrorException;
+import giovani.nfestatusproj.nfestatus.utils.NumberUtils;
 
 @Component
 public class DownloadNFEStatusSnapshotService {
@@ -125,7 +126,9 @@ public class DownloadNFEStatusSnapshotService {
 						}
 						
 						case COLUMN_AVERAGETIME: {
-							//Not implementated - Unknown data type
+							Long averageTime = NumberUtils.parseLongOrNull(columnContent);
+							snapshot.setAverageTimeSeconds(averageTime);
+							
 							break;
 						}
 						

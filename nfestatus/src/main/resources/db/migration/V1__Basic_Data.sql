@@ -7,7 +7,7 @@ CREATE TABLE NFEStatusSnapshot (
 	nfeStatusInutilisation4 		BIGINT 		NOT NULL,
 	nfeStatusProtocol4Query 		BIGINT 		NOT NULL,
 	nfeStatusService4Status 		BIGINT 		NOT NULL,
-	averageTimeMilis 				BIGINT 		NULL,
+	averageTimeSeconds 				BIGINT 		NULL,
 	nfeStatusRegister4Query 		BIGINT 		NOT NULL,
 	nfeStatusEvent4Reception 		BIGINT 		NOT NULL
 );

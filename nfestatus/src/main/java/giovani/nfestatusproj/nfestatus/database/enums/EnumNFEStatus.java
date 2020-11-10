@@ -2,9 +2,9 @@ package giovani.nfestatusproj.nfestatus.database.enums;
 
 public enum EnumNFEStatus {
 	ONLINE("Online"),
-	FAILING("Failing"),
+	FAILING("Falhando"),
 	OFFLINE("Offline"),
-	UNKNOWN("Unknown"),
+	UNKNOWN("Desconhecido"),
 	;
 	
 	private final String statusDescription;

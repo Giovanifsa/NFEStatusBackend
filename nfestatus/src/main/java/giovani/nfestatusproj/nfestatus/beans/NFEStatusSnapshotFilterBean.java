@@ -5,28 +5,10 @@ import java.util.List;
 
 import giovani.nfestatusproj.nfestatus.database.enums.EnumAuthorizer;
 
-public class NFEStatusSnapshotFilterBean {
-	private Integer page;
-	private Integer rows;
+public class NFEStatusSnapshotFilterBean  extends NFEStatusSnapshotFilterCommonBean {
 	private Date captureMoment;
 	private List<EnumAuthorizer> authorizers;
 	private Boolean distinctByAuthorizerLatest;
-	
-	public Integer getPage() {
-		return page;
-	}
-
-	public void setPage(Integer page) {
-		this.page = page;
-	}
-
-	public Integer getRows() {
-		return rows;
-	}
-	
-	public void setRows(Integer rows) {
-		this.rows = rows;
-	}
 	
 	public Date getCaptureMoment() {
 		return captureMoment;

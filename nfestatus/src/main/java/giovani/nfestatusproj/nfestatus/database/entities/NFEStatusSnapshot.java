@@ -42,7 +42,7 @@ public class NFEStatusSnapshot extends AbstractEntity {
 	@Enumerated
 	private EnumNFEStatus nfeStatusService4Status;
 	
-	private Long averageTimeMilis;
+	private Long averageTimeSeconds;
 	
 	@Enumerated
 	private EnumNFEStatus nfeStatusRegister4Query;
@@ -120,14 +120,6 @@ public class NFEStatusSnapshot extends AbstractEntity {
 		this.nfeStatusService4Status = nfeStatusService4Status;
 	}
 
-	public Long getAverageTimeMilis() {
-		return averageTimeMilis;
-	}
-
-	public void setAverageTimeMilis(Long averageTimeMilis) {
-		this.averageTimeMilis = averageTimeMilis;
-	}
-
 	public EnumNFEStatus getNfeStatusRegister4Query() {
 		return nfeStatusRegister4Query;
 	}
@@ -142,6 +134,14 @@ public class NFEStatusSnapshot extends AbstractEntity {
 
 	public void setNfeStatusEvent4Reception(EnumNFEStatus nfeStatusEvent4Reception) {
 		this.nfeStatusEvent4Reception = nfeStatusEvent4Reception;
+	}
+	
+	public Long getAverageTimeSeconds() {
+		return averageTimeSeconds;
+	}
+
+	public void setAverageTimeSeconds(Long averageTimeSeconds) {
+		this.averageTimeSeconds = averageTimeSeconds;
 	}
 
 	@Override

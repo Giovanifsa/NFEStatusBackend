@@ -24,7 +24,7 @@ public class NFEStatusSnapshotDTO implements Serializable {
 	
 	private EnumNFEStatusDTO nfeStatusService4Status;
 	
-	private Long averageTimeMilis;
+	private Long averageTimeSeconds;
 	
 	private EnumNFEStatusDTO nfeStatusRegister4Query;
 	
@@ -94,12 +94,12 @@ public class NFEStatusSnapshotDTO implements Serializable {
 		this.nfeStatusService4Status = nfeStatusService4Status;
 	}
 
-	public Long getAverageTimeMilis() {
-		return averageTimeMilis;
+	public Long getAverageTimeSeconds() {
+		return averageTimeSeconds;
 	}
 
-	public void setAverageTimeMilis(Long averageTimeMilis) {
-		this.averageTimeMilis = averageTimeMilis;
+	public void setAverageTimeSeconds(Long averageTimeSeconds) {
+		this.averageTimeSeconds = averageTimeSeconds;
 	}
 
 	public EnumNFEStatusDTO getNfeStatusRegister4Query() {
@@ -122,7 +122,7 @@ public class NFEStatusSnapshotDTO implements Serializable {
 		NFEStatusSnapshotDTO dto = new NFEStatusSnapshotDTO();
 		
 		dto.setAuthorizer(EnumAuthorizerDTO.parse(entity.getAuthorizer()));
-		dto.setAverageTimeMilis(entity.getAverageTimeMilis());
+		dto.setAverageTimeSeconds(entity.getAverageTimeSeconds());
 		dto.setCaptureMoment(entity.getCaptureMoment());
 		dto.setIdNFEStatusSnapshot(entity.getIdNFEStatusSnapshot());
 		dto.setNfeStatusAuthorization4(EnumNFEStatusDTO.parse(entity.getNfeStatusAuthorization4()));

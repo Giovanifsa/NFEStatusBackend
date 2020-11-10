@@ -26,4 +26,12 @@ public class ListUtils {
 		
 		return paginatedList;
 	}
-}
+	
+	public static <T> T first(List<T> list) {
+		if (list != null) {
+			return list.stream().findFirst().orElse(null);
+		}
+		
+		return null;
+	}
+} 

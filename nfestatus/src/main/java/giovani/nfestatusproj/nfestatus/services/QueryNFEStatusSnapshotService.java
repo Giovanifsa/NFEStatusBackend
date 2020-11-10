@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import giovani.nfestatusproj.nfestatus.beans.NFEStatusSnapshotFilterBean;
+import giovani.nfestatusproj.nfestatus.beans.NFEStatusSnapshotFilterCommonBean;
 import giovani.nfestatusproj.nfestatus.beans.NFEStatusSnapshotFilterMostUnavailableBean;
 import giovani.nfestatusproj.nfestatus.beans.NFEStatusSnapshotFilterMostUnavailableResultBean;
 import giovani.nfestatusproj.nfestatus.beans.NFEStatusSnapshotFilterResultBean;
@@ -20,6 +21,7 @@ import giovani.nfestatusproj.nfestatus.database.entities.NFEStatusSnapshot;
 import giovani.nfestatusproj.nfestatus.database.enums.EnumAuthorizer;
 import giovani.nfestatusproj.nfestatus.database.enums.EnumNFEStatus;
 import giovani.nfestatusproj.nfestatus.database.enums.EnumService;
+import giovani.nfestatusproj.nfestatus.exceptions.ClientErrorException;
 import giovani.nfestatusproj.nfestatus.utils.BooleanUtils;
 import giovani.nfestatusproj.nfestatus.utils.ListUtils;
 import giovani.nfestatusproj.nfestatus.utils.ObjectCounter;
@@ -31,6 +33,8 @@ public class QueryNFEStatusSnapshotService {
 	private NFEStatusSnapshotEAO nfeStatusSnapshotEAO;
 	
 	public NFEStatusSnapshotFilterResultBean queryByAuthorizersAndDatePaginated(NFEStatusSnapshotFilterBean filter) {
+		validateNFEStatusSnapshotFilterCommonBean(filter);
+		
 		Pageable pagination = PageRequest.of(filter.getPage(), filter.getRows());
 		
 		if (!ListUtils.isEmpty(filter.getAuthorizers())) {
@@ -57,6 +61,8 @@ public class QueryNFEStatusSnapshotService {
 	}
 	
 	public NFEStatusSnapshotFilterMostUnavailableResultBean queryByMostUnavailableServicesPaginated(NFEStatusSnapshotFilterMostUnavailableBean filter) {
+		validateNFEStatusSnapshotFilterCommonBean(filter);
+		
 		List<EnumService> filterServices = filter.getServices();
 		
 		if (!ListUtils.isEmpty(filterServices)) {
@@ -105,5 +111,21 @@ public class QueryNFEStatusSnapshotService {
 		}
 		
 		return NFEStatusSnapshotFilterMostUnavailableResultBean.empty();
+	}
+	
+	private void validateNFEStatusSnapshotFilterCommonBean(NFEStatusSnapshotFilterCommonBean filter) {
+		String className = filter.getClass().getSimpleName();
+		
+		if (filter.getPage() == null || filter.getPage() < 0) {
+			raiseInvalidFilterState(className + "[page] must be not null and above or equals to 0.");
+		}
+		
+		if (filter.getRows() == null || filter.getRows() < 1) {
+			raiseInvalidFilterState(className + "[rows] must be not null and above or equals to 1.");
+		}
+	}
+
+	private void raiseInvalidFilterState(String message) {
+		throw new ClientErrorException(message);
 	}
 }
